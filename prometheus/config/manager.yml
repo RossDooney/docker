@@ -1,0 +1,9 @@
+groups:
+- name: manager.rules
+  rules:
+  - alert: InstanceDown
+    expr: up == 0
+    for: 15s
+    labels:
+      severity: "critical"
+    annotations:

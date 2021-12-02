@@ -1,0 +1,28 @@
+version: '3'
+services:
+  nginx:
+    build: nginx
+    ports:
+     - 80:80
+  
+  nginxExport:
+    image: nginx/nginx-prometheus-exporter:0.9.0
+    command:                                                                                                          
+    - -nginx.scrape-uri
+    - http://host.docker.internal/stub_status
+    ports: 
+    - 9113:9113
+
+    
+  prometheus:
+    build: prometheus
+    ports:
+      - 9090:9090
+  
+  alertmanager:
+    image: prom/alertmanager
+    ports: 
+      - 9093:9093
+
+
+
